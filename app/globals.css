@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --green: #075b35;
+  --forest: #06452a;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+  }
+
+  body {
+    background-color: #f8f9f4;
+    color: #171a18;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+    color: var(--forest);
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-green;
+  }
+
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition-[background-color,color,transform,box-shadow] duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-primary {
+    @apply btn bg-green text-white hover:bg-forest hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(6,69,42,0.24)];
+  }
+
+  .btn-secondary {
+    @apply btn border border-green bg-transparent text-green hover:bg-sage-soft hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(6,69,42,0.12)];
+  }
+
+  .card {
+    @apply rounded-card border border-[rgba(6,69,42,0.10)] bg-white shadow-card;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium text-charcoal;
+  }
+
+  .field-input {
+    @apply w-full rounded-xl border border-inputline bg-white px-3.5 py-3 text-sm text-charcoal outline-none transition-shadow placeholder:text-muted focus:border-green focus:ring-2 focus:ring-green/25;
+  }
+
+  .field-error {
+    @apply mt-1 text-sm font-medium text-[#8a1c1c];
+  }
+}
+
+/* Hero — gentle fade-up on load + floating badge */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-up {
+  animation: hero-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes badge-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.badge-float {
+  animation: badge-float 4s ease-in-out infinite;
+}
+
+/* Trust-strip marquee — infinite, seamless, pure CSS (duplicated content).
+   No scrollbar ever (overflow:hidden). Pauses on hover / focus. */
+.trust-marquee {
+  overflow: hidden;
+  /* soft fade at both edges so items enter / leave gently */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 3rem,
+    #000 calc(100% - 3rem),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 3rem,
+    #000 calc(100% - 3rem),
+    transparent 100%
+  );
+}
+
+.trust-marquee-track {
+  display: flex;
+  width: max-content;
+  flex-wrap: nowrap;
+  /* one full loop = exactly one copy width (-50% of the 2-copy track) → seamless */
+  animation: trust-marquee-scroll 45s linear infinite;
+  will-change: transform;
+}
+
+.trust-marquee:hover .trust-marquee-track,
+.trust-marquee:focus-within .trust-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes trust-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  /* Exception: this is a slow, continuous, non-flashing trust ticker with a
+     pause-on-hover control — keep it scrolling so every item stays reachable
+     without a scrollbar. */
+  .trust-marquee-track {
+    animation: trust-marquee-scroll 60s linear infinite !important;
+  }
+}

@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+.env
+.env.local
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# Loose source assets kept at repo root before normalization into public/images
+/*.jpg
+/*.jpeg
+/*.png
+!/public/**

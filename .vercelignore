@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+.git
+*.tsbuildinfo
+
+# Loose source assets kept at repo root (originals live in public/images)
+/*.jpg
+/*.jpeg
+/*.png
+!/public/**
