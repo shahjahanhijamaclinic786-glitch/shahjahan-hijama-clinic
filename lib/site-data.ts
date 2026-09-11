@@ -266,16 +266,16 @@ export const faqs = [
     a: "Hijama (cupping) is a traditional practice that uses suction cups on the skin. In wet cupping, tiny surface scratches are made so a small amount of blood is drawn with the suction. Sessions are performed by qualified practitioners with single-use equipment.",
   },
   {
-    q: "What is Sunnah Hijama?",
-    a: "Sunnah Hijama follows the traditional method and points associated with the practice of the Prophet ﷺ. It is carried out with the same hygiene and professional standards as our other services.",
+    q: "Is fasting required before hijama session?",
+    a: "Yes, 4 hours of fasting is required for attending a hijama session.",
   },
   {
     q: "What happens during a session?",
     a: "The practitioner discusses your request, prepares the area, applies the cups, and completes the treatment. The whole session is done privately and calmly, and single-use equipment is used throughout.",
   },
   {
-    q: "What should I expect before and after a session?",
-    a: "It helps to be well hydrated and to have eaten a light meal beforehand. Afterwards, the treated area may look marked for a few days. The practitioner will share simple aftercare guidance.",
+    q: "What are the Sunnah Hijama dates?",
+    a: "The preferred dates are the 17th, 19th, and 21st of the Islamic lunar month. Gregorian dates change every month and may vary according to local moon sighting.",
   },
   {
     q: "Are sessions private?",

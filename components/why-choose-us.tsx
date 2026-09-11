@@ -1,5 +1,6 @@
+import Image from "next/image";
 import { SectionHeader } from "./section-header";
-import { iconByName, SparkleIcon, ShieldIcon } from "./icons";
+import { iconByName, ShieldIcon } from "./icons";
 import { whyChooseUs, clinic } from "@/lib/site-data";
 
 export function WhyChooseUs() {
@@ -25,8 +26,14 @@ export function WhyChooseUs() {
             </svg>
 
             <div className="relative">
-              <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white text-green shadow-card">
-                <SparkleIcon className="h-7 w-7" />
+              <span className="mx-auto flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-white shadow-card">
+                <Image
+                  src="/images/brand/logo.jpeg"
+                  alt={clinic.name}
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 object-cover"
+                />
               </span>
 
               <p dir="rtl" lang="ar" className="mt-6 font-heading text-2xl font-bold text-forest">

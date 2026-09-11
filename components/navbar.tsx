@@ -1,12 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { navLinks, clinic } from "@/lib/site-data";
+import { navLinks, services, clinic } from "@/lib/site-data";
 import { track } from "@/lib/analytics";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -14,6 +17,17 @@ export function Navbar() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  useEffect(() => {
+    if (!servicesOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, [servicesOpen]);
 
   const bookClick = () => {
     setOpen(false);
@@ -41,16 +55,58 @@ export function Navbar() {
         </a>
 
         <ul className="hidden items-center gap-6 lg:flex">
-          {navLinks.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className="text-sm font-medium text-forest transition-colors hover:text-green"
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
+          {navLinks.map((l) =>
+            l.label === "Services" ? (
+              <li key={l.href} ref={servicesRef} className="relative">
+                <button
+                  type="button"
+                  className="flex items-center gap-1 text-sm font-medium text-forest transition-colors hover:text-green"
+                  aria-expanded={servicesOpen}
+                  aria-haspopup="true"
+                  onClick={() => setServicesOpen((v) => !v)}
+                >
+                  {l.label}
+                  <svg
+                    viewBox="0 0 24 24"
+                    className={`h-3.5 w-3.5 transition-transform ${servicesOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+                {servicesOpen ? (
+                  <ul
+                    role="menu"
+                    className="absolute left-0 top-[calc(100%+10px)] z-50 w-64 overflow-hidden rounded-2xl border border-[rgba(6,69,42,0.12)] bg-white py-2 shadow-[0_18px_44px_rgba(6,69,42,0.18)]"
+                  >
+                    {services.map((s) => (
+                      <li key={s.slug} role="none">
+                        <a
+                          href={l.href}
+                          role="menuitem"
+                          onClick={() => setServicesOpen(false)}
+                          className="block px-4 py-2.5 text-sm font-medium text-forest transition-colors hover:bg-sage-soft hover:text-green"
+                        >
+                          {s.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </li>
+            ) : (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  className="text-sm font-medium text-forest transition-colors hover:text-green"
+                >
+                  {l.label}
+                </a>
+              </li>
+            )
+          )}
         </ul>
 
         <div className="flex items-center gap-2">
@@ -75,17 +131,54 @@ export function Navbar() {
       {open ? (
         <div id="mobile-menu" className="border-t border-[rgba(6,69,42,0.12)] bg-sage-ref lg:hidden">
           <ul className="container-x flex flex-col py-2">
-            {navLinks.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-3 text-base font-medium text-forest"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
+            {navLinks.map((l) =>
+              l.label === "Services" ? (
+                <li key={l.href}>
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between py-3 text-base font-medium text-forest"
+                    aria-expanded={mobileServicesOpen}
+                    onClick={() => setMobileServicesOpen((v) => !v)}
+                  >
+                    {l.label}
+                    <svg
+                      viewBox="0 0 24 24"
+                      className={`h-4 w-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                  {mobileServicesOpen ? (
+                    <ul className="mb-2 space-y-0.5 border-l border-[rgba(6,69,42,0.15)] pl-4">
+                      {services.map((s) => (
+                        <li key={s.slug}>
+                          <a
+                            href={l.href}
+                            onClick={() => setOpen(false)}
+                            className="block py-2 text-sm text-muted hover:text-green"
+                          >
+                            {s.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </li>
+              ) : (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className="block py-3 text-base font-medium text-forest"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              )
+            )}
             <li className="py-3">
               <a href="#book-appointment" onClick={bookClick} className="btn-primary w-full">
                 Book Appointment

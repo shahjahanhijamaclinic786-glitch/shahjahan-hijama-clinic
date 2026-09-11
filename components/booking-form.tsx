@@ -11,7 +11,7 @@ import {
 } from "@/lib/validation";
 import { track, getUtmParams } from "@/lib/analytics";
 import { BOOKING_PREFILL_EVENT, type BookingPrefill } from "@/lib/booking-prefill";
-import { WhatsAppIcon, CheckIcon, MaleIcon, FemaleIcon, ArrowRightIcon } from "./icons";
+import { CheckIcon, MaleIcon, FemaleIcon, ArrowRightIcon } from "./icons";
 
 const TIME_OPTIONS = (() => {
   const out: string[] = [];
@@ -154,20 +154,25 @@ export function BookingForm() {
             <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green text-white">
               <CheckIcon className="h-8 w-8" />
             </span>
-            <h2 className="mt-5 text-2xl font-bold">Your appointment request has been submitted.</h2>
+            <h2 className="mt-5 text-2xl font-bold">
+              Assalam o Alaikum, your request has been submitted successfully.
+            </h2>
             <p className="mt-2 text-sm text-muted">
               Our team will review your request and contact you to confirm the appointment.
             </p>
-            <a
-              href={clinic.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
               className="btn-secondary mt-6"
-              onClick={() => track("whatsapp_click", { location: "booking_success" })}
+              onClick={() => {
+                setData(empty);
+                setErrors({});
+                setShowErrors(false);
+                startedRef.current = false;
+                setStatus("idle");
+              }}
             >
-              <WhatsAppIcon className="h-4 w-4" />
-              Message us on WhatsApp
-            </a>
+              Request another booking
+            </button>
           </div>
         </div>
       </section>

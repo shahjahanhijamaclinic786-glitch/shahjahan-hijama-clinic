@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { TrackedCTA } from "./tracked-cta";
-import { WhatsAppIcon, HomeIcon, ArrowRightIcon, StarIcon } from "./icons";
+import { WhatsAppIcon, HomeIcon, ArrowRightIcon, StarIcon, CertificateIcon, ShieldIcon } from "./icons";
 import { clinic, reviews } from "@/lib/site-data";
 
 export function Hero() {
@@ -28,10 +28,38 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      {/* Trust badge — floats gently over the top-left of the photo on desktop */}
+      {/* Trust badges — float gently at scattered points over the photo on desktop */}
       <div className="badge-float absolute left-[51%] top-8 z-20 hidden rounded-2xl bg-forest/95 px-5 py-3 text-white shadow-[0_14px_34px_rgba(6,69,42,0.3)] lg:block">
         <p className="text-[15px] font-semibold">Authentic Sunnah Hijama</p>
         <p className="text-xs text-sage-ref">Safe • Professional • Trusted</p>
+      </div>
+
+      <div
+        className="badge-float absolute right-6 top-8 z-20 hidden items-center gap-2.5 rounded-2xl bg-forest/95 py-2.5 pl-2.5 pr-4 text-white shadow-[0_14px_34px_rgba(6,69,42,0.3)] lg:flex"
+        style={{ animationDelay: "0.6s" }}
+      >
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15">
+          <CertificateIcon className="h-4 w-4" />
+        </span>
+        <p className="whitespace-nowrap text-[13px] font-semibold leading-tight">
+          20+ Years
+          <br />
+          Experience
+        </p>
+      </div>
+
+      <div
+        className="badge-float absolute left-[58%] top-[230px] z-20 hidden items-center gap-2.5 rounded-2xl bg-forest/95 py-2.5 pl-2.5 pr-4 text-white shadow-[0_14px_34px_rgba(6,69,42,0.3)] lg:flex"
+        style={{ animationDelay: "1.2s" }}
+      >
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15">
+          <ShieldIcon className="h-4 w-4" />
+        </span>
+        <p className="whitespace-nowrap text-[13px] font-semibold leading-tight">
+          Single-Use
+          <br />
+          Equipment
+        </p>
       </div>
 
       <div className="container-x relative z-10 flex flex-1 items-center">
