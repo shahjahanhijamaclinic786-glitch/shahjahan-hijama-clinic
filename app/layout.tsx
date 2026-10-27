@@ -18,19 +18,20 @@ export const metadata: Metadata = {
   title: {
     default: "Shahjahan Hijama Clinic — Hijama in Islamabad, Rawalpindi & Abbottabad",
     template: "%s — Shahjahan Hijama Clinic",
+    verification: { google: "tNweeFybEaggI3jmY_0L5h361yNle6Hbn_khszxZEDk" },
   },
   description,
   keywords: [
     "Hijama Islamabad",
     "Hijama Rawalpindi",
-    "Hijama Abbottabad",
     "Hijama clinic Islamabad",
     "Hijama home service Islamabad",
     "Female Hijama Islamabad",
     "Sunnah Hijama Islamabad",
-    "Wet Cupping Islamabad",
+    "Wet Cupping Rawalpindi",
     "Dry Cupping Islamabad",
     "Facial Cupping Islamabad",
+    "Hijama clinic Rawalpindi"
   ],
   alternates: { canonical: "/" },
   applicationName: clinic.name,
