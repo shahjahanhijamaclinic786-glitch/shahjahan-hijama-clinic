@@ -16,9 +16,8 @@ const description =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Shahjahan Hijama Clinic — Hijama in Islamabad, Rawalpindi & Abbottabad",
+    default: "Shahjahan Hijama Clinic — Hijama in Islamabad & Rawalpindi",
     template: "%s — Shahjahan Hijama Clinic",
-    verification: { google: "tNweeFybEaggI3jmY_0L5h361yNle6Hbn_khszxZEDk" },
   },
   description,
   keywords: [
@@ -33,6 +32,7 @@ export const metadata: Metadata = {
     "Facial Cupping Islamabad",
     "Hijama clinic Rawalpindi"
   ],
+  verification: { google: "tNweeFybEaggI3jmY_0L5h361yNle6Hbn_khszxZEDk" },
   alternates: { canonical: "/" },
   applicationName: clinic.name,
   authors: [{ name: clinic.name }],
